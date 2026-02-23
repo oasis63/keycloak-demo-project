@@ -1,0 +1,10 @@
+const PublicPage = () => {
+  return (
+    <>
+      <h1>Public Page</h1>
+      <p>This page is accessible to everyone.</p>
+    </>
+  );
+};
+
+export default PublicPage;
