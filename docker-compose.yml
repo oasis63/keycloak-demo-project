@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:latest
+  #   container_name: keycloak
+  #   command: start-dev --import-realm
+  #   environment:
+  #     KEYCLOAK_ADMIN: admin
+  #     KEYCLOAK_ADMIN_PASSWORD: admin123
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
+
+  backend:
+    build: ./keycloak-backend-app
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      KEYCLOAK_URL: http://keycloak:8080
+    # depends_on:
+    #   - keycloak
+
+  frontend:
+    build: ./keycloak-front-app
+    container_name: frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
